@@ -1,8 +1,17 @@
+import re
+
 from setuptools import find_packages, setup  # type: ignore
 from setuptools.extern import packaging  # type: ignore
 
-from shape_bruteforce import __version__
-version = __version__
+# Version info -- read without importing
+with open("shape_bruteforce/__init__.py", "rt", encoding="utf8") as f:
+    version_re = re.search(r"__version__ = \"(.*?)\"", f.read())
+    if version_re:
+        version = version_re.group(1)
+    else:
+        raise ValueError("Could not determine package version")
+    # Normalize version so `setup.py --version` show same version as twine.
+    version = str(packaging.version.Version(version))
 
 # Add readme as long description
 with open("README.md") as f:
