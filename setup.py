@@ -10,6 +10,7 @@ with open("README.md") as f:
 
 # Library dependencies
 INSTALL_REQUIRES = [
+    "numpy",
     "pycairo",
 ]
 
