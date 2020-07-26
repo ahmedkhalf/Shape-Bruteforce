@@ -10,7 +10,9 @@ with open("README.md") as f:
 # Library dependencies
 INSTALL_REQUIRES = [
     "numpy",
+    "opencv-python",
     "pycairo",
+    "tqdm",
 ]
 
 setup(
