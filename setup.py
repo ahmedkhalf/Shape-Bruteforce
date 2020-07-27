@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup  # type: ignore
-from shape_bruteforce import utils
+from shape_bruteforce import _version
 
-version = utils.get_version()
+version = _version.__version__
 
 # Add readme as long description
 with open("README.md") as f:
@@ -9,6 +9,7 @@ with open("README.md") as f:
 
 # Library dependencies
 INSTALL_REQUIRES = [
+    "matplotlib",
     "numpy",
     "opencv-python",
     "pycairo",
