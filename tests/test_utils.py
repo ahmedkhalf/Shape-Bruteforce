@@ -24,19 +24,19 @@ class TestResize(unittest.TestCase):
 
     def test_resize_height(self):
         image = sb.utils.resize_image(self.img, 64, mode=sb.utils.RESIZE_HEIGHT)
-        self.assertEquals(image.shape[0], 64)
+        self.assertEqual(image.shape[0], 64)
 
     def test_resize_width(self):
         image = sb.utils.resize_image(self.img, 64, mode=sb.utils.RESIZE_WIDTH)
-        self.assertEquals(image.shape[1], 64)
+        self.assertEqual(image.shape[1], 64)
 
     def test_resize_min(self):
         image = sb.utils.resize_image(self.img, 64, mode=sb.utils.RESIZE_MIN)
-        self.assertEquals(image.shape[1], 64)
+        self.assertEqual(image.shape[1], 64)
 
     def test_resize_max(self):
         image = sb.utils.resize_image(self.img, 64, mode=sb.utils.RESIZE_MAX)
-        self.assertEquals(image.shape[0], 64)
+        self.assertEqual(image.shape[0], 64)
 
 
 if __name__ == '__main__':
