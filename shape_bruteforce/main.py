@@ -13,6 +13,7 @@ def main():
 
     target = sb.utils.load_image(args.image)
     target = sb.utils.resize_image(target, args.size)
+    sb.utils.show_image(target)
 
 
 if __name__ == "__main__":
