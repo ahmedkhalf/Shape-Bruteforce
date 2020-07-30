@@ -15,7 +15,7 @@ class Image:
 
     def to_array(self):
         buf = self.surface.get_data()
-        array = np.ndarray(shape=(self.width, self.height, 4), dtype=np.uint8, buffer=buf)
+        array = np.ndarray(shape=(self.height, self.width, 4), dtype=np.uint8, buffer=buf)
         return array
 
 
