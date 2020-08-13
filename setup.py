@@ -1,7 +1,15 @@
-from setuptools import find_packages, setup  # type: ignore
-from shape_bruteforce import _version
+import re
 
-version = _version.__version__
+from setuptools import find_packages, setup  # type: ignore
+
+# Version info -- read without importing
+with open("shape_bruteforce/_version.py", "rt", encoding="utf8") as f:
+    version_re = re.search(r"__version__ = \"(.*?)\"", f.read())
+    if version_re:
+        version = version_re.group(1)
+    else:
+        raise ValueError("Could not determine package version")
+    version = str(version)
 
 # Add readme as long description
 with open("README.md") as f:
