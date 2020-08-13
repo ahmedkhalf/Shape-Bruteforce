@@ -24,5 +24,15 @@ class Image:
         return array
 
 
-def train():
-    pass
+class Training:
+    def __init__(self, target):
+        self.th, self.tw = target.shape[0:2]  # target height, target width
+        self.target = target
+        self.parent = Image(self.tw, self.th)
+        self.parent.draw_background(0, 0, 0)
+
+    def mse(self, arr):
+        return float(np.square(np.subtract(arr, self.target)).mean())
+
+    def train(self):
+        pass
