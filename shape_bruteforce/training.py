@@ -1,5 +1,8 @@
 import cairo
 import numpy as np
+import random
+import math
+import tqdm
 
 
 class Image:
@@ -31,8 +34,47 @@ class Training:
         self.parent = Image(self.tw, self.th)
         self.parent.draw_background(0, 0, 0)
 
-    def mse(self, arr):
+    def mse(self, img):
+        arr = img.to_array()
         return float(np.square(np.subtract(arr, self.target)).mean())
 
+    def add_random_circle(self, img):
+        child = Image(self.tw, self.th)
+        child.copy_image(img)
+        child.ctx.set_source_rgba(random.random(), random.random(), random.random(), random.random())
+        child.ctx.arc(
+            random.uniform(0, self.tw), random.uniform(0, self.th),  # x, y
+            random.uniform(0, (self.tw + self.th) / 2 / 2),          # radius
+            0, 2 * math.pi)
+        child.ctx.fill()
+        return child
+
     def train(self):
-        pass
+        pbar = tqdm.trange(256)
+        for i in pbar:
+            best_child = self.add_random_circle(self.parent)
+            best_child_fit = self.mse(best_child)
+
+            for j in range(2000):
+                child = self.add_random_circle(self.parent)
+                child_fit = self.mse(child)
+
+                if child_fit < best_child_fit:
+                    best_child = child
+                    best_child_fit = child_fit
+                    pbar.set_description(str(int(best_child_fit)))
+
+            self.parent = best_child
+
+
+if __name__ == "__main__":
+    from shape_bruteforce import utils
+    target = utils.load_image("mona-lisa.jpg")
+    target = utils.resize_image(target, 64)
+    target = np.dstack((target, np.ones((target.shape[0], target.shape[1])) * 255))
+    trainer = Training(target)
+    trainer.train()
+    import cv2
+    arr = trainer.parent.to_array()
+    arr = cv2.cvtColor(arr, cv2.COLOR_BGR2RGB)
+    utils.show_image(arr)
