@@ -62,7 +62,7 @@ class Training:
                 if child_fit < best_child_fit:
                     best_child = child
                     best_child_fit = child_fit
-                    pbar.set_description(str(int(best_child_fit)))
+                    pbar.set_description("ERR " + str(int(best_child_fit)))
 
             self.parent = best_child
 
