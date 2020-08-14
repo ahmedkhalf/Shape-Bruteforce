@@ -19,7 +19,7 @@ def load_image(path):
     if not os.path.exists(path):
         raise FileNotFoundError(f"Image was not found at {path}")
 
-    img = cv2.imread(path)
+    img = cv2.imread(path, cv2.IMREAD_UNCHANGED)
     return img
 
 
@@ -76,6 +76,7 @@ def resize_image(img, max_size, mode=RESIZE_MIN):
     return img
 
 
-def show_image(img):
-    pyplot.imshow(img)
+def show_image(arr):
+    arr = cv2.cvtColor(arr, cv2.COLOR_BGR2RGB)
+    pyplot.imshow(arr)
     pyplot.show()

@@ -74,7 +74,5 @@ if __name__ == "__main__":
     target = utils.normalize_image(target)
     trainer = Training(target)
     trainer.train()
-    import cv2
     arr = trainer.parent.to_array()
-    arr = cv2.cvtColor(arr, cv2.COLOR_BGR2RGB)
     utils.show_image(arr)
