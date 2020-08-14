@@ -1,5 +1,6 @@
 import cv2
 from matplotlib import pyplot
+import numpy as np
 import os
 from shape_bruteforce import _version
 
@@ -20,6 +21,19 @@ def load_image(path):
 
     img = cv2.imread(path)
     return img
+
+
+def normalize_image(img):
+    shape = img.shape
+    if img.ndim == 3:
+        if shape[2] == 4:
+            return img
+        elif shape[2] == 3:
+            img = np.dstack((img, np.ones((shape[0], shape[1])) * 255))
+            return img
+    elif img.ndim == 2:
+        pass
+    raise NotImplementedError()
 
 
 def _resize_height(img, max_size):

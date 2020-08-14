@@ -71,7 +71,7 @@ if __name__ == "__main__":
     from shape_bruteforce import utils
     target = utils.load_image("mona-lisa.jpg")
     target = utils.resize_image(target, 64)
-    target = np.dstack((target, np.ones((target.shape[0], target.shape[1])) * 255))
+    target = utils.normalize_image(target)
     trainer = Training(target)
     trainer.train()
     import cv2
