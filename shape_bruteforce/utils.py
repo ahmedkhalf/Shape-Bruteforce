@@ -22,6 +22,8 @@ def load_image(path):
         raise FileNotFoundError(f"Image was not found at {path}")
 
     img = cv2.imread(path, cv2.IMREAD_UNCHANGED)
+    # Make sure image is uint8
+    img = img.astype("uint8")
     return img
 
 
@@ -84,6 +86,8 @@ def resize_image(img, max_size, mode=RESIZE_MIN):
 
 
 def show_image(arr):
+    # Make sure image is uint8
+    arr = arr.astype("uint8")
     arr = cv2.cvtColor(arr, cv2.COLOR_BGR2RGB)
     pyplot.imshow(arr)
     pyplot.show()

@@ -31,7 +31,7 @@ class Image:
 class Training:
     def __init__(self, target):
         self.th, self.tw = target.shape[0:2]  # target height, target width
-        self.target = target
+        self.target = target.astype("float")  # to make error function work
         self.parent = Image(self.tw, self.th)
         self.parent.draw_background(0, 0, 0)
 
