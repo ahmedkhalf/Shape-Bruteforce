@@ -1,7 +1,8 @@
+import os
+
 import cv2
 from matplotlib import pyplot
 
-import os
 from shape_bruteforce import _version
 from shape_bruteforce import errors
 

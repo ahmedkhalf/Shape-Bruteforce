@@ -1,7 +1,8 @@
-import cairo
-import numpy as np
 import random
 import math
+
+import cairo
+import numpy as np
 import tqdm
 
 
