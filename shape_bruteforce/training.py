@@ -49,13 +49,13 @@ class Training:
         child.ctx.fill()
         return child
 
-    def train(self):
-        pbar = tqdm.trange(256)
+    def train(self, shape_count=256, gens_per_shape=2000):
+        pbar = tqdm.trange(shape_count)
         for i in pbar:
             best_child = self.add_random_circle(self.parent)
             best_child_fit = self.mse(best_child)
 
-            for j in range(2000):
+            for j in range(gens_per_shape):
                 child = self.add_random_circle(self.parent)
                 child_fit = self.mse(child)
 
