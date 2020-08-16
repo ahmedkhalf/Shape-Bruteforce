@@ -1,8 +1,9 @@
 import cv2
 from matplotlib import pyplot
-import numpy as np
+
 import os
 from shape_bruteforce import _version
+from shape_bruteforce import errors
 
 RESIZE_MAX = 0
 RESIZE_MIN = 1
@@ -27,13 +28,18 @@ def normalize_image(img):
     shape = img.shape
     if img.ndim == 3:
         if shape[2] == 4:
-            return img
+            pass
         elif shape[2] == 3:
-            img = np.dstack((img, np.ones((shape[0], shape[1])) * 255))
-            return img
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)
+        elif shape[2] == 1:
+            img = cv2.cvtColor(img, cv2.COLOR_GRAY2BGRA)
+        else:
+            raise errors.ImageDepthError(shape[2], [1, 3, 4])
     elif img.ndim == 2:
-        pass
-    raise NotImplementedError()
+        img = cv2.cvtColor(img, cv2.COLOR_GRAY2BGRA)
+    else:
+        raise errors.ImageDimensionError(img.ndim, [2, 3])
+    return img
 
 
 def _resize_height(img, max_size):
