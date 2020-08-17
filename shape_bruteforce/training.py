@@ -5,6 +5,8 @@ import cairo
 import numpy as np
 import tqdm
 
+from shape_bruteforce import shapes
+
 
 class Image:
     def __init__(self, width, height):
